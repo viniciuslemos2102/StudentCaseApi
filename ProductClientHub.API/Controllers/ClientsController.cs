@@ -2,6 +2,7 @@
 using ProductClientHub.API.UseCases.Clients.Register;
 using ProductClientHub.Communication.Requests;
 using ProductClientHub.Communication.Responses;
+using ProductClientHub.Exceptions.ExceptionsBase;
 
 namespace ProductClientHub.API.Controllers
 {
@@ -18,12 +19,15 @@ namespace ProductClientHub.API.Controllers
             {
                 var useCase = new RegisterClientUseCase();
 
+
+
                 var response = useCase.Execute(request);
                 return Created(string.Empty, response);
             }
-            catch (ArgumentException ex)
+            catch (ProductClientHubException ex)
             {
-                return BadRequest(new ReponseErrorMenssagesJson(ex.Message));
+                var erros = ex.GetError();
+                return BadRequest(new ReponseErrorMenssagesJson(erros));
             }
             
             catch

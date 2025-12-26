@@ -7,5 +7,10 @@
         {
             Errors = [message];
         }
+
+        public ReponseErrorMenssagesJson(List<string> messages)
+        {
+            Errors = messages;
+        }
     }
 }
