@@ -1,4 +1,6 @@
-﻿namespace ProductClientHub.Exceptions.ExceptionsBase
+﻿using System.Net;
+
+namespace ProductClientHub.Exceptions.ExceptionsBase
 {
     public class ErrorOnValidationException : ProductClientHubException
     {
@@ -9,9 +11,9 @@
             
         }
 
-        public override List<string> GetError()
-        {
-            return _errors;
-        }
+        public override List<string> GetError() => _errors;
+      
+
+        public override HttpStatusCode GetHttpStatusCode() => HttpStatusCode.BadRequest;
     }
 }
